@@ -4,34 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.MainActivity"
-    tools:ignore="MissingConstraints">
+    tools:context=".ui.FirstFragment">
 
+    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="first" />
 
     <Button
         android:id="@+id/GET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="GET" />
-
+        android:text="GET_DATA" />
     <Button
-        android:id="@+id/CLEAR"
+        android:id="@+id/CLEAR_DATA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CLEAR" />
-
-    <Button
-        android:id="@+id/GOFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="GOFragment" />
-
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:text="cacheDATA" />
 </LinearLayout>

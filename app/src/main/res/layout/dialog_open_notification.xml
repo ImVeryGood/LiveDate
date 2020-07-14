@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_radius_10"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_16">
+
+        <ImageView
+            android:layout_width="@dimen/dp_18"
+            android:layout_height="@dimen/dp_18"
+            android:layout_gravity="start"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:text="开启通知栏，立刻收到最新通知！"
+            android:textColor="#404040" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_8"
+        android:background="#efefef" />
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_8"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/dp_8"
+        android:paddingLeft="@dimen/dp_30"
+        android:paddingRight="@dimen/dp_30"
+        android:paddingTop="@dimen/dp_8">
+
+        <RadioButton
+            android:id="@+id/rb_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sel_blue_gray_radius_40"
+            android:button="@null"
+            android:checked="true"
+            android:minHeight="@dimen/dp_35"
+            android:paddingLeft="@dimen/dp_16"
+            android:text="立即开启"
+            android:textColor="@color/ck_white_black"
+            android:textSize="@dimen/sp_12" />
+
+        <RadioButton
+            android:id="@+id/rb_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:background="@drawable/sel_blue_gray_radius_40"
+            android:button="@null"
+            android:minHeight="@dimen/dp_35"
+            android:paddingLeft="@dimen/dp_16"
+            android:text="暂时关闭"
+            android:textColor="@color/ck_white_black"
+            android:textSize="@dimen/sp_12" />
+
+        <RadioButton
+            android:id="@+id/rb_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:background="@drawable/sel_blue_gray_radius_40"
+            android:button="@null"
+            android:minHeight="@dimen/dp_35"
+            android:paddingLeft="@dimen/dp_16"
+            android:text="不再提醒"
+            android:textColor="@color/ck_white_black"
+            android:textSize="@dimen/sp_12" />
+    </RadioGroup>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_weight="0"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_45"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/sp_14" />
+
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_45"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/sp_14" />
+    </LinearLayout>
+</LinearLayout>

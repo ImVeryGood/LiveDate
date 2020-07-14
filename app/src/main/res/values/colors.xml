@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="bbl_999999">#999999</color>
+    <color name="bbl_ff0000">#ff0000</color>
+    <color name="select_color">#0E1C39</color>
+    <color name="normal_color">#B9B9B9</color>
+
+    <color name="colorPrimary">#FFCC01</color>
+    <color name="colorPrimaryDark">#9E9E9E</color>
+    <color name="colorAccent">#FFCC01</color>
+
+    <color name="gdt_blue">#FFCC01</color>
+    <color name="gdt_blue_less">#FFCC01</color>
+    <color name="textOrange">#FB5221</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_press">#bdbdbd</color>
+    <!--文字黑色-->
+    <color name="textBlack_66">#666</color>
+    <color name="textBlack">#333333</color>
+    <color name="textBlackLess">#7f000000</color>
+    <!--文字灰色-->
+    <color name="textGray">#999999</color>
+    <!--文字红色-->
+    <color name="textRed">#df212c</color>
+    <color name="textRed_FF">#FF0000</color>
+    <!--文字黄色-->
+    <color name="textYellow">#f7bc0c</color>
+    <!--按钮灰色-->
+    <color name="btn_gray">#E6E8E7</color>
+    <!--分割线灰色-->
+    <color name="dividerColor">#f1f1f1</color>
+    <color name="background">#eeeeee</color>
+    <color name="grayCc">#CCCCCC</color>
+    <!--黄色-->
+    <color name="yellow">#F9D048</color>
+    <color name="yellow_FF">#FFFF00</color>
+    <!--纯白-->
+    <color name="color_bg">#f6f6f6</color>
+    <!--纯白按压-->
+    <color name="white_ec">#ECECEC</color>
+    <!--透明-->
+    <color name="transfer">#00000000</color>
+    <!--绿色-->
+    <color name="green">#33CC00</color>
 </resources>

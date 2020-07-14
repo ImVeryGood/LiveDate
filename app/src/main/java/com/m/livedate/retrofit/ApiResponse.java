@@ -9,20 +9,16 @@ public class ApiResponse<T extends Object> {
 
     private int errorCode; //状态码
     private String errorMsg; //信息
+    private boolean isSuccess;
     private T data; //数据
 
-//    public ApiResponse(int code, String msg) {
-//        this.code = code;
-//        this.msg = msg;
-//        this.data = null;
-//    }
-//
-//    public ApiResponse(int code, String msg, T data) {
-//        this.code = code;
-//        this.msg = msg;
-//        this.data = data;
-//    }
+    public boolean isSuccess() {
+        return isSuccess;
+    }
 
+    public void setSuccess(boolean success) {
+        isSuccess = success;
+    }
 
     public int getErrorCode() {
         return errorCode;

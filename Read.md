@@ -1,0 +1,20 @@
+viewModel:数据处理框架，可感知生命周期
+LiveData:可被观察的数据持有类它可以感知 Activity、Fragment或Service 等组件的生命周期，
+LiveData 是一个抽象类，它的实现子类有 MutableLiveData ，MediatorLiveData。在实际使用中，用得比较多的是 MutableLiveData
+
+1.可以做到组件处于激活状态的时候才会回调相应的方法，从而刷新UI
+
+2.感知生命周期，不用担心内存泄露
+
+3.当Config 导致Activity重新创建的时候，不需要手动去处理数据的存储和恢复。已经包含
+
+4.当Activity不是处于激活状态的时候，如果想LiveData setValue 之后立即回调obsever的onChange方法。而不是等
+Activity处于激活的时候才回调，你可以使用observeForver方法，但是你必须再onDestroy的时候removeOb；
+
+LiveData与MutableLiveData的其实在概念上是一模一样的.唯一几个的区别如下:
+
+1.MutableLiveData的父类是LiveData
+
+2.LiveData在实体类里可以通知指定某个字段的数据更新.
+
+3.MutableLiveData则是完全是整个实体类或者数据类型变化后才通知.不会细节到某个字段

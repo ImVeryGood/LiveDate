@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.FragmentActivity">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.m.livedate.bottombar.BottomBarLayout
+        android:id="@+id/bottom_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bottom_tab_bg"
+        android:elevation="2dp">
+
+        <com.m.livedate.bottombar.BottomBarItem
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:iconNormal="@mipmap/icon_main"
+            app:iconSelected="@mipmap/icon_main_select"
+            app:itemMarginTop="4dp"
+            app:itemText="首页"
+            app:itemTextSize="12sp"
+            app:textColorNormal="@color/normal_color"
+            app:textColorSelected="@color/select_color" />
+
+        <com.m.livedate.bottombar.BottomBarItem
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:iconNormal="@mipmap/icon_file"
+            app:iconSelected="@mipmap/icon_file_select"
+            app:itemMarginTop="4dp"
+            app:itemText="文档"
+            app:itemTextSize="12sp"
+            app:textColorNormal="@color/normal_color"
+            app:textColorSelected="@color/select_color" />
+
+        <com.m.livedate.bottombar.BottomBarItem
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:iconNormal="@mipmap/icon_message"
+            app:iconSelected="@mipmap/icon_message_select"
+            app:itemMarginTop="4dp"
+            app:itemText="消息"
+            app:itemTextSize="12sp"
+            app:textColorNormal="@color/normal_color"
+            app:textColorSelected="@color/select_color" />
+
+        <com.m.livedate.bottombar.BottomBarItem
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:iconNormal="@mipmap/icon_mine"
+            app:iconSelected="@mipmap/icon_mine_select"
+            app:itemMarginTop="4dp"
+            app:itemText="我的"
+            app:itemTextSize="12sp"
+            app:textColorNormal="@color/normal_color"
+            app:textColorSelected="@color/select_color" />
+    </com.m.livedate.bottombar.BottomBarLayout>
+</RelativeLayout>
