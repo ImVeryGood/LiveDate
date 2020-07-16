@@ -1,4 +1,4 @@
-package com.m.livedate.retrofit;
+package com.m.livedate.ui.bean;
 
 import java.util.List;
 

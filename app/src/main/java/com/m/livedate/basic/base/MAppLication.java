@@ -1,4 +1,4 @@
-package com.m.livedate.base;
+package com.m.livedate.basic.base;
 
 import android.app.Application;
 

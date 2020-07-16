@@ -7,7 +7,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
 import com.m.livedate.R;
-import com.m.livedate.base.BaseFragment;
+import com.m.livedate.basic.base.BaseFragment;
+import com.m.livedate.databinding.FragmentSecondBinding;
 import com.m.livedate.ui.model.MViewModel;
 
 import butterknife.BindView;
@@ -15,11 +16,16 @@ import butterknife.BindView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SecondFragment extends BaseFragment<MViewModel> {
+public class SecondFragment extends BaseFragment<MViewModel, FragmentSecondBinding> {
 
 
     @BindView(R.id.text)
     TextView text;
+
+    @Override
+    protected void setDataBinding() {
+
+    }
 
     @Override
     protected int getFragmentLayoutId() {
@@ -28,7 +34,7 @@ public class SecondFragment extends BaseFragment<MViewModel> {
 
     @Override
     protected void initData() {
-        text.setText(new Gson().toJson(getVM().getListBeanData().getValue()));
+        dataBinding.text.setText("66666");
 
     }
 

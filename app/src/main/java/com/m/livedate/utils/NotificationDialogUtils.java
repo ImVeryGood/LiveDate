@@ -15,7 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.m.livedate.R;
-import com.m.livedate.base.MAppLication;
+import com.m.livedate.basic.base.MAppLication;
 
 
 public class NotificationDialogUtils {

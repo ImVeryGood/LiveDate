@@ -2,7 +2,7 @@ package com.m.livedate.utils;
 
 import android.widget.Toast;
 
-import com.m.livedate.base.MAppLication;
+import com.m.livedate.basic.base.MAppLication;
 
 
 public class ToastUtils {

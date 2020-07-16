@@ -1,28 +1,23 @@
 package com.m.livedate.ui;
 
 
-import android.widget.FrameLayout;
-
+import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.m.livedate.R;
-import com.m.livedate.base.BaseActivity;
+import com.m.livedate.basic.base.BaseActivity;
 import com.m.livedate.bottombar.BottomBarItem;
 import com.m.livedate.bottombar.BottomBarLayout;
+import com.m.livedate.databinding.ActivityFragmentBinding;
+import com.m.livedate.ui.model.NulllViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 
-public class FragmentActivity extends BaseActivity implements BottomBarLayout.OnItemSelectedListener {
+public class FragmentActivity extends BaseActivity<NulllViewModel, ActivityFragmentBinding> implements BottomBarLayout.OnItemSelectedListener {
 
-
-    @BindView(R.id.frameLayout)
-    FrameLayout frameLayout;
-    @BindView(R.id.bottom_bar_layout)
-    BottomBarLayout bottomBarLayout;
     private List<Fragment> fragments;
     private FirstFragment firstFragment;
     private SecondFragment secondFragment;
@@ -31,6 +26,11 @@ public class FragmentActivity extends BaseActivity implements BottomBarLayout.On
     @Override
     protected int getContentViewId() {
         return R.layout.activity_fragment;
+    }
+
+    @Override
+    protected void setDataBinding() {
+
     }
 
     @Override
@@ -47,7 +47,8 @@ public class FragmentActivity extends BaseActivity implements BottomBarLayout.On
 
     @Override
     protected void initListener() {
-        bottomBarLayout.setOnItemSelectedListener(this);
+        dataBinding.bottomBarLayout.setOnItemSelectedListener(this);
+
 
     }
 

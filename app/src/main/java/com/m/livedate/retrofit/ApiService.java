@@ -2,6 +2,8 @@ package com.m.livedate.retrofit;
 
 import androidx.lifecycle.LiveData;
 
+import com.m.livedate.ui.bean.ListBean;
+
 import java.util.List;
 
 import retrofit2.http.GET;

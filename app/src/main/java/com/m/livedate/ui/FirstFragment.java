@@ -1,35 +1,37 @@
 package com.m.livedate.ui;
 
 
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
 import com.m.livedate.R;
-import com.m.livedate.base.BaseFragment;
+import com.m.livedate.basic.adapter.OnItemClickListener;
+import com.m.livedate.basic.base.BaseFragment;
+import com.m.livedate.databinding.FragmentFirstragmentBinding;
 import com.m.livedate.retrofit.ApiResponse;
-import com.m.livedate.retrofit.ListBean;
+import com.m.livedate.ui.adapter.FirstFragmentAdapter;
+import com.m.livedate.ui.bean.ListBean;
 import com.m.livedate.ui.model.MViewModel;
+import com.m.livedate.utils.ToastUtils;
 
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FirstFragment extends BaseFragment<MViewModel> {
+public class FirstFragment extends BaseFragment<MViewModel, FragmentFirstragmentBinding> {
 
+    private RecyclerView recyclerView;
+    private FirstFragmentAdapter adapter;
 
-    @BindView(R.id.text)
-    TextView text;
-    @BindView(R.id.GET)
-    Button GET;
+    @Override
+    protected void setDataBinding() {
+
+    }
 
     @Override
     protected int getFragmentLayoutId() {
@@ -38,32 +40,34 @@ public class FirstFragment extends BaseFragment<MViewModel> {
 
     @Override
     protected void initData() {
+        mViewModel.getData();
+        recyclerView = dataBinding.rv;
+        LinearLayoutManager manager = new LinearLayoutManager(mContext);
+        adapter = new FirstFragmentAdapter();
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter);
 
     }
 
     @Override
     protected void initListener() {
-        getVM().getListBeanData().observe(this, new Observer<ApiResponse<List<ListBean.DataBean>>>() {
+        mViewModel.getListBeanData().observe(this, new Observer<ApiResponse<List<ListBean.DataBean>>>() {
             @Override
             public void onChanged(ApiResponse<List<ListBean.DataBean>> listApiResponse) {
-                text.setText(new Gson().toJson(listApiResponse));
+                adapter.setNewData(listApiResponse.getData());
             }
         });
+      adapter.setOnItemListener(new OnItemClickListener<ListBean.DataBean>() {
+          @Override
+          public void onItemClickListener(ListBean.DataBean dataBean, int position) {
+              ToastUtils.showShortToast(dataBean.getName());
+          }
 
+          @Override
+          public boolean onItemLongClick(ListBean.DataBean dataBean, int position) {
+              return false;
+          }
+      });
     }
 
-    @OnClick({R.id.text, R.id.GET, R.id.CLEAR_DATA})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.text:
-                text.setText(null);
-                break;
-            case R.id.GET:
-                getVM().getData();
-                break;
-            case R.id.CLEAR_DATA:
-                text.setText(new Gson().toJson(getVM().getListBeanData().getValue()));
-                break;
-        }
-    }
 }

@@ -55,9 +55,9 @@ public class LiveDataCallAdapter<T> implements CallAdapter<T, LiveData<T>> {
                     public void onResponse(Call<T> call, Response<T> response) {
                         ApiResponse apiResponse = new ApiResponse();
                         if (response.isSuccessful()) {
-                            apiResponse.setSuccess(true);
                             T body = response.body();
                             apiResponse = (ApiResponse) body;
+                            apiResponse.setSuccess(true);
                         } else {
                             apiResponse.setSuccess(false);
                             int code = response.code();

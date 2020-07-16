@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="dataBean"
+            type="com.m.livedate.ui.bean.ListBean.DataBean" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/bbl_999999"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@{dataBean.name}" />
+
+        <ImageView
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+           android:layout_marginLeft="@dimen/dp_100"
+            app:placeHolder="@{@drawable/ic_launcher}"
+            app:imageUrl="@{@string/url}"/>
+    </LinearLayout>
+</layout>

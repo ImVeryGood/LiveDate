@@ -1,37 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.MainActivity"
-    tools:ignore="MissingConstraints">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <data>
 
-    <Button
-        android:id="@+id/GET"
+        <variable
+            name="userBean"
+            type="com.m.livedate.ui.bean.UserBean" />
+
+        <variable
+            name="methord"
+            type="com.m.livedate.ui.MainActivity" />
+
+        <variable
+            name="viewModel"
+            type="com.m.livedate.ui.model.MViewModel" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="GET" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.MainActivity"
+        tools:ignore="MissingConstraints">
 
-    <Button
-        android:id="@+id/CLEAR"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="CLEAR" />
+        <EditText
+            android:id="@+id/user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@={userBean.name}" />
 
-    <Button
-        android:id="@+id/GOFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="GOFragment" />
+        <EditText
+            android:id="@+id/pass_word"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:text="@={userBean.passWord}" />
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        <Button
+            android:id="@+id/try_binding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->methord.onClick()}"
+            android:text="@{@string/Welcome+userBean.name}" />
+
+    </LinearLayout>
+</layout>

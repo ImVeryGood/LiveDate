@@ -6,9 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.m.livedate.base.BaseViewModel;
+import com.m.livedate.basic.base.BaseViewModel;
 import com.m.livedate.retrofit.ApiResponse;
-import com.m.livedate.retrofit.ListBean;
+import com.m.livedate.ui.bean.ListBean;
 
 import java.util.List;
 
@@ -29,6 +29,7 @@ public class MViewModel extends BaseViewModel {
 
     public void getData() {
         trigger.setValue(true);
+        showDialog.setValue(true,"加载中");
     }
 
     public LiveData<ApiResponse<List<ListBean.DataBean>>> getListBeanData() {
