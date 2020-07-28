@@ -10,10 +10,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.Transformations;
 
+import com.m.livedate.basic.retrofit.ApiResponse;
+import com.m.livedate.basic.retrofit.RequestImpl;
 import com.m.livedate.basic.view.DialogBean;
 import com.m.livedate.basic.view.DialogLiveData;
-import com.m.livedate.retrofit.ApiResponse;
-import com.m.livedate.retrofit.RequestImpl;
 import com.m.livedate.utils.ToastUtils;
 
 /**
@@ -34,8 +34,8 @@ public class BaseViewModel extends AndroidViewModel {
     @NonNull
     public final <T> LiveData<ApiResponse<T>> map(@NonNull LiveData<ApiResponse<T>> source) {
         return Transformations.map(source, it -> {
+            Log.d("SSSSSSSSSSS", "map: false");
             showDialog.setValue(false);
-            Log.d("SSSSSSSSSSS", "map: "+it.isSuccess());
             if (it.isSuccess()) {
                 parseCode(it);
             }
@@ -63,5 +63,6 @@ public class BaseViewModel extends AndroidViewModel {
     protected void onCleared() {
         super.onCleared();
         showDialog = null;
+        Log.d("SSSSSSSSSSSS", "onCleared: ");
     }
 }

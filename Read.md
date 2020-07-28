@@ -1,4 +1,4 @@
-viewModel:数据处理框架，可感知生命周期
+viewModel:数据处理框架，可感知生命周期,数据绑定了Activity/Fragment生命周期，当Activity正常关闭的时候，都会清除ViewModel中的数据.
 LiveData:可被观察的数据持有类它可以感知 Activity、Fragment或Service 等组件的生命周期，
 LiveData 是一个抽象类，它的实现子类有 MutableLiveData ，MediatorLiveData。在实际使用中，用得比较多的是 MutableLiveData
 
@@ -18,3 +18,28 @@ LiveData与MutableLiveData的其实在概念上是一模一样的.唯一几个�
 2.LiveData在实体类里可以通知指定某个字段的数据更新.
 
 3.MutableLiveData则是完全是整个实体类或者数据类型变化后才通知.不会细节到某个字段
+
+
+dataBinding 数据绑定
+
+绑定自定义方法：
+
+  android:onClick="@{()->methord.onClick()}"
+  绑定值：
+   android:text="@{userBean.passWord}"
+   
+   双向绑定：
+   xml:绑定值
+    android:text="@={userBean.passWord}"
+    get方法添加注解： @Bindable
+    
+     @Bindable
+        public String getName() {
+            return name;
+        }
+    set方法：调用 notifyPropertyChanged(BR.name);
+    
+        public void setName(String name) {
+            this.name = name;
+            notifyPropertyChanged(BR.name);
+        }

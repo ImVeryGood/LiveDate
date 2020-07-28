@@ -50,9 +50,9 @@ public abstract class BaseFragment<VM extends BaseViewModel, DB extends ViewData
         dataBinding = initDataBinding(inflater, getFragmentLayoutId(), container);
         createViewModel();
         setDataBinding();
-        initObserve();
         initData();
         initListener();
+        initObserve();
         return dataBinding.getRoot();
     }
 

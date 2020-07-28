@@ -1,8 +1,6 @@
 package com.m.livedate.ui;
 
 
-import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,7 +10,7 @@ import com.m.livedate.R;
 import com.m.livedate.basic.adapter.OnItemClickListener;
 import com.m.livedate.basic.base.BaseFragment;
 import com.m.livedate.databinding.FragmentFirstragmentBinding;
-import com.m.livedate.retrofit.ApiResponse;
+import com.m.livedate.basic.retrofit.ApiResponse;
 import com.m.livedate.ui.adapter.FirstFragmentAdapter;
 import com.m.livedate.ui.bean.ListBean;
 import com.m.livedate.ui.model.MViewModel;
@@ -46,6 +44,7 @@ public class FirstFragment extends BaseFragment<MViewModel, FragmentFirstragment
         adapter = new FirstFragmentAdapter();
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
+
 
     }
 

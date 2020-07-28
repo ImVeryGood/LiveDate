@@ -1,6 +1,8 @@
 package com.m.livedate.ui;
 
 
+import android.os.Handler;
+
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -22,7 +24,7 @@ public class FragmentActivity extends BaseActivity<NulllViewModel, ActivityFragm
     private FirstFragment firstFragment;
     private SecondFragment secondFragment;
     private int mIndex = 0;
-
+    private Handler mHandler;
     @Override
     protected int getContentViewId() {
         return R.layout.activity_fragment;
@@ -52,7 +54,9 @@ public class FragmentActivity extends BaseActivity<NulllViewModel, ActivityFragm
 
     }
 
-
+    public void setHandler(Handler handler) {
+        mHandler = handler;
+    }
     @Override
     public void onItemSelected(BottomBarItem bottomBarItem, int previousPosition, int currentPosition) {
         switch (currentPosition) {
@@ -61,6 +65,8 @@ public class FragmentActivity extends BaseActivity<NulllViewModel, ActivityFragm
                 break;
             case 1:
                 switchFragment(1);
+                if (mHandler!=null)
+                mHandler.sendEmptyMessage(1);
                 break;
             case 2:
                 break;

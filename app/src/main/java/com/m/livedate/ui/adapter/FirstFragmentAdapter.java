@@ -4,8 +4,8 @@ package com.m.livedate.ui.adapter;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.library.baseAdapters.BR;
 
-import com.m.livedate.BR;
 import com.m.livedate.R;
 import com.m.livedate.basic.adapter.BaseDBRVAdapter;
 import com.m.livedate.basic.adapter.BaseDBRVHolder;

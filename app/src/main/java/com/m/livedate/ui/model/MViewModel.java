@@ -1,5 +1,6 @@
 package com.m.livedate.ui.model;
 
+
 import android.app.Application;
 
 import androidx.annotation.NonNull;
@@ -7,7 +8,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.m.livedate.basic.base.BaseViewModel;
-import com.m.livedate.retrofit.ApiResponse;
+import com.m.livedate.basic.retrofit.ApiResponse;
+import com.m.livedate.basic.retrofit.ApiService;
 import com.m.livedate.ui.bean.ListBean;
 
 import java.util.List;

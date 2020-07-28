@@ -1,15 +1,11 @@
-package com.m.livedate.retrofit;
+package com.m.livedate.basic.retrofit;
 
 import android.accounts.NetworkErrorException;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 
 import com.google.gson.Gson;
-import com.m.livedate.utils.ToastUtils;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.ConnectException;
 import java.net.SocketException;

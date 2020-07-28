@@ -1,4 +1,4 @@
-package com.m.livedate.retrofit;
+package com.m.livedate.basic.retrofit;
 
 import androidx.lifecycle.LiveData;
 
@@ -13,7 +13,6 @@ import retrofit2.http.GET;
  * describe：
  */
 public interface ApiService {
-
     @GET("wxarticle/chapters/json")
     LiveData<ApiResponse<List<ListBean.DataBean>>> getListBeanData();
 }

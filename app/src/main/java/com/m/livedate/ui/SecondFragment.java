@@ -1,17 +1,24 @@
 package com.m.livedate.ui;
 
 
-import android.widget.TextView;
+import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 
-import com.google.gson.Gson;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.m.livedate.R;
 import com.m.livedate.basic.base.BaseFragment;
+import com.m.livedate.basic.retrofit.ApiResponse;
 import com.m.livedate.databinding.FragmentSecondBinding;
+import com.m.livedate.ui.bean.ListBean;
 import com.m.livedate.ui.model.MViewModel;
 
-import butterknife.BindView;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,12 +26,9 @@ import butterknife.BindView;
 public class SecondFragment extends BaseFragment<MViewModel, FragmentSecondBinding> {
 
 
-    @BindView(R.id.text)
-    TextView text;
-
     @Override
     protected void setDataBinding() {
-
+        dataBinding.setMethod(this);
     }
 
     @Override
@@ -34,12 +38,22 @@ public class SecondFragment extends BaseFragment<MViewModel, FragmentSecondBindi
 
     @Override
     protected void initData() {
-        dataBinding.text.setText("66666");
 
+    }
+
+    public void getData() {
+        Log.d("SSSSSSSSS", "getData: ");
+        mViewModel.getData();
     }
 
     @Override
     protected void initListener() {
+        mViewModel.getListBeanData().observe(getViewLifecycleOwner(), new Observer<ApiResponse<List<ListBean.DataBean>>>() {
+            @Override
+            public void onChanged(ApiResponse<List<ListBean.DataBean>> listApiResponse) {
+                Log.d("SSSSSSSSSSSSSSSSS", "onChanged: SecondFragment");
+            }
+        });
 
     }
 

@@ -12,12 +12,12 @@ public final class DialogLiveData<T> extends LiveData<T> {
     public void setValue(boolean isShow) {
         bean.setShow(isShow);
         bean.setMsg("");
-        setValue((T) bean);
+        postValue((T) bean);
     }
 
     public void setValue(boolean isShow, String msg) {
         bean.setShow(isShow);
         bean.setMsg(msg);
-        setValue((T) bean);
+        postValue((T) bean);
     }
 }

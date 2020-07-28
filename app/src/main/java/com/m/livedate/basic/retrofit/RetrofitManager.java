@@ -1,4 +1,4 @@
-package com.m.livedate.retrofit;
+package com.m.livedate.basic.retrofit;
 
 import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
