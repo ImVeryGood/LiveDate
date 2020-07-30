@@ -3,20 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-<variable
-    name="method"
-    type="com.m.livedate.ui.SecondFragment" />
+
+        <variable
+            name="method"
+            type="com.m.livedate.ui.SecondFragment" />
     </data>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".ui.SecondFragment">
 
         <!-- TODO: Update blank fragment layout -->
         <TextView
+            android:id="@+id/text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/hello_blank_fragment" />
 
         <Button
@@ -25,5 +28,5 @@
             android:layout_height="wrap_content"
             android:onClick="@{()->method.getData()}"
             android:text="获取GET" />
-    </FrameLayout>
+    </LinearLayout>
 </layout>

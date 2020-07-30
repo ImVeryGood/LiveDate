@@ -42,4 +42,5 @@
     <color name="transfer">#00000000</color>
     <!--绿色-->
     <color name="green">#33CC00</color>
+    <color name="blue">#1296db</color>
 </resources>

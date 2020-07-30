@@ -18,31 +18,50 @@
     </data>
 
     <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".ui.MainActivity"
         tools:ignore="MissingConstraints">
 
-        <EditText
-            android:id="@+id/user_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@={userBean.name}" />
+        <ImageView
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_80"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_20"
+            android:src="@mipmap/icon_android" />
 
         <EditText
             android:id="@+id/pass_word"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
+            android:layout_marginHorizontal="@dimen/dp_20"
+            android:hint="输入账号"
+            android:inputType="number"
             android:text="@={userBean.passWord}" />
+
+        <EditText
+            android:id="@+id/user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_20"
+            android:hint="输入密码"
+            android:layout_marginTop="@dimen/dp_20"
+            android:inputType="textPassword"
+            android:text="@={userBean.name}" />
 
         <Button
             android:id="@+id/try_binding"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@drawable/button_enable"
+            android:textColor="@color/white"
             android:onClick="@{()->methord.onClick()}"
-            android:text="@{@string/Welcome+userBean.name}" />
-
+            android:text="@{@string/Welcome}" />
     </LinearLayout>
+
+
 </layout>
