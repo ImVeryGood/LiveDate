@@ -15,8 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".mvvm.ui.FragmentActivity"></activity>
-        <activity android:name=".mvvm.ui.MainActivity">
+        <activity android:name=".mvvm.ui.MainActivity"></activity>
+        <activity android:name=".custom.TouchPullActivity" />
+        <activity android:name=".mvvm.ui.FragmentActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
