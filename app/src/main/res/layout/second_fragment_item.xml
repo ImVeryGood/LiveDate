@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="pageBean"
+            type="com.m.livedate.ui.bean.PagingBean.DataBean.DatasBean" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60">
+
+        <com.m.livedate.basic.view.DataImageView
+            android:id="@+id/image"
+            imageUrl="@{pageBean.envelopePic}"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/image"
+            android:text="@{pageBean.chapterName}"
+            android:textColor="@color/blue" />
+    </RelativeLayout>
+</layout>

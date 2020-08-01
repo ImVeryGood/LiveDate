@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,7 @@ public abstract class BaseFragment<VM extends BaseViewModel, DB extends ViewData
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         dataBinding = initDataBinding(inflater, getFragmentLayoutId(), container);
+        dataBinding.setLifecycleOwner(this);
         createViewModel();
         setDataBinding();
         initData();
@@ -78,7 +80,8 @@ public abstract class BaseFragment<VM extends BaseViewModel, DB extends ViewData
                 //如果没有指定泛型，择默认使用BaseViewModel
                 modelClass = BaseViewModel.class;
             }
-            mViewModel = (VM) new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(modelClass);
+
+            mViewModel = (VM) new ViewModelProvider(requireActivity()).get(modelClass);
         }
     }
 

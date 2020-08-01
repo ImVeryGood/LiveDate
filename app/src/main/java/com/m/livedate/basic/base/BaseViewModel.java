@@ -9,6 +9,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.Transformations;
+import androidx.lifecycle.ViewModel;
 
 import com.m.livedate.basic.retrofit.ApiResponse;
 import com.m.livedate.basic.retrofit.RequestImpl;
@@ -34,7 +35,6 @@ public class BaseViewModel extends AndroidViewModel {
     @NonNull
     public final <T> LiveData<ApiResponse<T>> map(@NonNull LiveData<ApiResponse<T>> source) {
         return Transformations.map(source, it -> {
-            Log.d("SSSSSSSSSSS", "map: false");
             showDialog.setValue(false);
             if (it.isSuccess()) {
                 parseCode(it);
@@ -44,7 +44,6 @@ public class BaseViewModel extends AndroidViewModel {
     }
 
     protected void parseCode(ApiResponse it) {
-        Log.d("SSSSSSSSSSSSS", "parseCode: ");
         int code = it.getErrorCode();
         String errorMsg = it.getErrorMsg();
         if (code == 401 || code == 4433) {

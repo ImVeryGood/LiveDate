@@ -2,16 +2,19 @@ package com.m.livedate.ui;
 
 
 import android.os.Handler;
+import android.util.Log;
 
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.m.livedate.R;
 import com.m.livedate.basic.base.BaseActivity;
 import com.m.livedate.bottombar.BottomBarItem;
 import com.m.livedate.bottombar.BottomBarLayout;
 import com.m.livedate.databinding.ActivityFragmentBinding;
+import com.m.livedate.ui.model.MViewModel;
 import com.m.livedate.ui.model.NulllViewModel;
 
 import java.util.ArrayList;
@@ -62,6 +65,7 @@ public class FragmentActivity extends BaseActivity<NulllViewModel, ActivityFragm
         switch (currentPosition) {
             case 0:
                 switchFragment(0);
+                MViewModel model=new ViewModelProvider(this).get(MViewModel.class);
                 break;
             case 1:
                 switchFragment(1);

@@ -2,6 +2,9 @@ package com.m.livedate.basic.base;
 
 import android.app.Application;
 
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
+
 /**
  * date:2020/7/13
  * describe：
@@ -13,6 +16,7 @@ public class MAppLication extends Application {
     public void onCreate() {
         super.onCreate();
         mAppLication = this;
+        Logger.addLogAdapter(new AndroidLogAdapter());
     }
 
     public static MAppLication getMApplication() {

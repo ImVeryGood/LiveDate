@@ -1,6 +1,7 @@
 package com.m.livedate.basic.retrofit;
 
 import android.accounts.NetworkErrorException;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -75,6 +76,7 @@ public class LiveDataCallAdapter<T> implements CallAdapter<T, LiveData<T>> {
                             apiResponse.setData(null);
 
                         }
+                        Log.d("SSSSSSSSSSSSSs", "onResponse: "+new Gson().toJson(apiResponse));
                         postValue((T) apiResponse);
                     }
 

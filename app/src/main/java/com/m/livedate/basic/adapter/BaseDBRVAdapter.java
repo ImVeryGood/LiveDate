@@ -98,10 +98,12 @@ public class BaseDBRVAdapter<Data, DB extends ViewDataBinding> extends RecyclerV
      * @param data
      */
     public void setNewData(List<Data> data) {
-        this.dataList.clear();
-        this.dataList.addAll(data);
-        Log.d("SSSSSSSSSS", "addData: "+new Gson().toJson(this.dataList));
-        notifyDataSetChanged();
+        if (this.dataList!=null&& data!=null){
+            this.dataList.clear();
+            this.dataList.addAll(data);
+            notifyDataSetChanged();
+        }
+
     }
     /**
      * 添加数据

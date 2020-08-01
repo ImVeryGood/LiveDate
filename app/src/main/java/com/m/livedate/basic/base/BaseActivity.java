@@ -1,14 +1,13 @@
 package com.m.livedate.basic.base;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 
 import com.m.livedate.basic.view.DialogBean;
 import com.m.livedate.basic.view.LoadingDialog;
@@ -16,9 +15,6 @@ import com.m.livedate.utils.ActivityManager;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 
 public abstract class BaseActivity<VM extends BaseViewModel, DB extends ViewDataBinding> extends AppCompatActivity {
@@ -30,6 +26,7 @@ public abstract class BaseActivity<VM extends BaseViewModel, DB extends ViewData
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dataBinding = initDataBinding(getContentViewId());
+        dataBinding.setLifecycleOwner(this);
         ActivityManager.getAppInstance().addActivity(this);
         createViewModel();
         setDataBinding();
@@ -55,10 +52,10 @@ public abstract class BaseActivity<VM extends BaseViewModel, DB extends ViewData
             if (type instanceof ParameterizedType) {
                 modelClass = (Class) ((ParameterizedType) type).getActualTypeArguments()[0];
             } else {
-                //如果没有指定泛型，择默认使用BaseViewModel
+                //如果没有指定泛型参数，则默认使用BaseViewModel
                 modelClass = BaseViewModel.class;
             }
-            mViewModel = (VM) new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(modelClass);
+            mViewModel = (VM) new ViewModelProvider(this).get(modelClass);
         }
     }
 

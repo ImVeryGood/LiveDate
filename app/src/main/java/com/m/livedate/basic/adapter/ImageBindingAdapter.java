@@ -15,18 +15,18 @@ import com.bumptech.glide.Glide;
  */
 public class ImageBindingAdapter {
 
-    @BindingAdapter("android:src")
-    public static void setSrc(ImageView view, Bitmap bitmap) {
-        view.setImageBitmap(bitmap);
-    }
-
-    @BindingAdapter("android:src")
-    public static void setSrc(ImageView view, int resId) {
-        view.setImageResource(resId);
-    }
-
-    @BindingAdapter({"app:imageUrl", "app:placeHolder"})
-    public static void loadImage(ImageView imageView, String url, Drawable holderDrawable) {
-        Glide.with(imageView.getContext()).load(url).placeholder(holderDrawable).into(imageView);
-    }
+//    @BindingAdapter("android:src")
+//    public static void setSrc(ImageView view, Bitmap bitmap) {
+//        view.setImageBitmap(bitmap);
+//    }
+//
+//    @BindingAdapter("android:src")
+//    public static void setSrc(ImageView view, int resId) {
+//        view.setImageResource(resId);
+//    }
+//
+//    @BindingAdapter({"app:url", "app:placeHolder"})
+//    public static void loadImage(ImageView imageView, String url, Drawable holderDrawable) {
+//        Glide.with(imageView.getContext()).load(url).placeholder(holderDrawable).into(imageView);
+//    }
 }
