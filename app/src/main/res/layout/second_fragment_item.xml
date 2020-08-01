@@ -6,14 +6,14 @@
 
         <variable
             name="pageBean"
-            type="com.m.livedate.ui.bean.PagingBean.DataBean.DatasBean" />
+            type="com.m.livedate.mvvm.ui.bean.PagingBean.DataBean.DatasBean" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60">
 
-        <com.m.livedate.basic.view.DataImageView
+        <com.m.livedate.mvvm.basic.view.DataImageView
             android:id="@+id/image"
             imageUrl="@{pageBean.envelopePic}"
             android:layout_width="@dimen/dp_40"

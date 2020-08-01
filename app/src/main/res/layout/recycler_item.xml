@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="dataBean"
+            type="com.m.livedate.mvvm.ui.bean.ListBean.DataBean" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
@@ -15,17 +22,11 @@
             android:layout_gravity="center_vertical"
             android:text="@{dataBean.name}" />
 
-        <com.m.livedate.basic.view.DataImageView
+        <com.m.livedate.mvvm.basic.view.DataImageView
             imageUrl="@{@string/url}"
             android:layout_width="@dimen/dp_40"
             android:layout_height="@dimen/dp_40"
             android:layout_marginLeft="@dimen/dp_100" />
     </LinearLayout>
 
-    <data>
-
-        <variable
-            name="dataBean"
-            type="com.m.livedate.ui.bean.ListBean.DataBean" />
-    </data>
 </layout>

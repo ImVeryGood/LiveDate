@@ -6,15 +6,15 @@
 
         <variable
             name="userBean"
-            type="com.m.livedate.ui.bean.UserBean" />
+            type="com.m.livedate.mvvm.ui.bean.UserBean" />
 
         <variable
             name="methord"
-            type="com.m.livedate.ui.MainActivity" />
+            type="com.m.livedate.mvvm.ui.MainActivity" />
 
         <variable
             name="viewModel"
-            type="com.m.livedate.ui.model.MViewModel" />
+            type="com.m.livedate.mvvm.ui.model.MViewModel" />
     </data>
 
     <LinearLayout
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.MainActivity"
+        tools:context=".mvvm.ui.MainActivity"
         tools:ignore="MissingConstraints">
 
         <ImageView
