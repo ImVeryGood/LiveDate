@@ -1,6 +1,9 @@
 package com.m.livedate.mvvm.ui;
 
 
+import android.util.Log;
+import android.view.View;
+
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -48,6 +51,8 @@ public class FirstFragment extends BaseFragment<MViewModel, FragmentFirstragment
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
         secondeViewModel = new ViewModelProvider(requireActivity()).get(SecondeViewModel.class);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setNestedScrollingEnabled(false);
 
     }
 

@@ -5,17 +5,50 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".custom.TouchPullActivity">
 
     <com.m.livedate.custom.view.TouchPullView
         android:id="@+id/touch_pull"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <!--    <com.m.livedate.custom.view.TestBell-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content" />-->
+
+    <!--    <com.m.livedate.custom.view.SwitchButton-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:sb_circleColor="@android:color/white"-->
+    <!--        app:sb_circleRadius="10dp"-->
+    <!--        app:sb_closeBackground="@android:color/black"-->
+    <!--        app:sb_interpolator="Accelerate"-->
+    <!--        app:sb_openBackground="@android:color/holo_red_light"-->
+    <!--        app:sb_status="open" />-->
+
+    <com.m.livedate.custom.view.CircleProgress
+        android:id="@+id/circle_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/bbl_ff0000" />
+        app:location="top"
+        app:base_progress_paint_color="@color/bbl_999999"
+        app:circle_radius="@dimen/dp_120"
+        app:progress_stroke_width="@dimen/dp_20"
+        app:progress_paint_color="@color/blue" />
 
-    <com.m.livedate.custom.view.TestBell
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="add" />
+
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="clear" />
 </LinearLayout>

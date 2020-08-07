@@ -1,14 +1,21 @@
 package com.m.livedate.custom.view;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.graphics.PathEffect;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+
+import com.orhanobut.logger.Logger;
 
 /**
  * createDate:2020/8/1
@@ -19,13 +26,13 @@ public class TouchPullView extends View {
     //    圆的画笔
     private Paint mCirclePaint;
     //    圆的半径
-    private int mCircleRadius = 100;
+    private int mCircleRadius = 200;
     private float mCircleX;
     private float mCircleY;
     //进度值
     private float mProgress;
     //    可拖动高度
-    private int mDragHeight = 400;
+    private int mDragHeight = 450;
 
     public TouchPullView(Context context) {
         super(context);
@@ -48,15 +55,22 @@ public class TouchPullView extends View {
         init();
     }
 
+    /**
+     * DashPathEffect 画虚线，new float[]{10, 5} 10代表实线的宽度，5代表虚线的宽度 phase 偏移量
+     */
     public void init() {
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         //        设置抗锯齿
         paint.setAntiAlias(true);
         //        防抖动
         paint.setDither(true);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(0xFF000000);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(40);
+        PathEffect effects = new DashPathEffect(new float[]{3, 3}, 0);
+        paint.setPathEffect(effects);
+        paint.setColor(0xFF000002);
         mCirclePaint = paint;
+
     }
 
     @Override
@@ -67,6 +81,7 @@ public class TouchPullView extends View {
 
     /**
      * 当测量的时候触发
+     * 0.5f 实现四舍五入
      *
      * @param widthMeasureSpec
      * @param heightMeasureSpec
@@ -80,7 +95,7 @@ public class TouchPullView extends View {
 
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
-        //最小宽度
+        //最小高度
         int minHeight = (int) ((mDragHeight * mProgress + 0.5f) + getPaddingTop() + getPaddingBottom());
         //最小宽度
         int minWidth = 2 * mCircleRadius + getPaddingLeft() + getPaddingRight();
@@ -113,6 +128,12 @@ public class TouchPullView extends View {
 
     /**
      * 当大小改变时触发
+     * java中有三种移位运算符
+     * <<      :     左移运算符，num << 1,对于是十进制相当于num乘以2。一定要数据的类型大小，再确定符号位。
+     * <p>
+     * >>      :     右移运算符，num >> 1,对于是十进制相当于num除以2。一定要数据的类型大小，再确定符号位。
+     * <p>
+     * >>>    :     无符号右移，忽略符号位，对于是二进制空位都以0补齐。只是对32位和64位的值有意义
      *
      * @param w
      * @param h
@@ -133,6 +154,10 @@ public class TouchPullView extends View {
      */
     public void setProgress(float progress) {
         mProgress = progress;
+        ObjectAnimator animator = ObjectAnimator.ofFloat(this, "rotation", 360 * progress / 100);
+        animator.setDuration(2000);
+        animator.start();
+
         //        请求重新测量
         requestLayout();
     }

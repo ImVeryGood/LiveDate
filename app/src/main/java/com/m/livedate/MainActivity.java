@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.m.livedate.custom.TouchPullActivity;
+import com.m.livedate.kotlin.KActivity;
+import com.m.livedate.mvp.ui.MVpActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,9 +24,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this,
                         com.m.livedate.mvvm.ui.MainActivity.class));
                 break;
+            case R.id.mvp:
+                startActivity(new Intent(this,
+                        MVpActivity.class));
+                break;
             case R.id.custom:
                 startActivity(new Intent(this,
                         TouchPullActivity.class));
+                break;
+            case R.id.kotlin:
+                startActivity(new Intent(this,
+                        KActivity.class));
                 break;
             default:
                 break;

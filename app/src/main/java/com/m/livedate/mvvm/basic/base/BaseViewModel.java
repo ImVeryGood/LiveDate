@@ -61,6 +61,5 @@ public class BaseViewModel extends AndroidViewModel {
     protected void onCleared() {
         super.onCleared();
         showDialog = null;
-        Log.d("SSSSSSSSSSSS", "onCleared: ");
     }
 }

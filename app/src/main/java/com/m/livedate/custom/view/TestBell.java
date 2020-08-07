@@ -6,7 +6,9 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -16,7 +18,7 @@ import androidx.annotation.RequiresApi;
  *
  * @author:spc describe：贝塞尔曲线
  */
-public class TestBell extends View {
+public class TestBell extends ViewGroup {
     public TestBell(Context context) {
         super(context);
         init();
@@ -36,6 +38,21 @@ public class TestBell extends View {
     public TestBell(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init();
+    }
+
+    @Override
+    protected void onLayout(boolean b, int i, int i1, int i2, int i3) {
+
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return super.onInterceptTouchEvent(ev);
+    }
+
+    @Override
+    protected boolean dispatchHoverEvent(MotionEvent event) {
+        return super.dispatchHoverEvent(event);
     }
 
     //画笔

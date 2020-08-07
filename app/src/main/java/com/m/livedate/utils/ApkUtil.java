@@ -12,6 +12,7 @@ import androidx.core.content.FileProvider;
 import java.io.File;
 
 public class ApkUtil {
+    public static String apkUrl = "http://download.sdk.mob.com/apkbus.apk";
     /**
      * 安装一个apk
      *

@@ -17,6 +17,16 @@
         android:onClick="goTo"
         android:text="MVVM"
         android:textColor="@color/white" />
+    <Button
+        android:id="@+id/mvp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@drawable/button_enable"
+        android:onClick="goTo"
+        android:text="MVP"
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/custom"
@@ -27,5 +37,15 @@
         android:background="@drawable/button_enable"
         android:onClick="goTo"
         android:text="Custom_view"
+        android:textColor="@color/white" />
+    <Button
+        android:id="@+id/kotlin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@drawable/button_enable"
+        android:onClick="goTo"
+        android:text="kotlin"
         android:textColor="@color/white" />
 </LinearLayout>
