@@ -7,6 +7,12 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_width="@dimen/dp_150"
+        android:layout_height="@dimen/dp_150"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/icon_android"/>
+
     <Button
         android:id="@+id/mvvm"
         android:layout_width="match_parent"
@@ -17,6 +23,7 @@
         android:onClick="goTo"
         android:text="MVVM"
         android:textColor="@color/white" />
+
     <Button
         android:id="@+id/mvp"
         android:layout_width="match_parent"
@@ -38,6 +45,7 @@
         android:onClick="goTo"
         android:text="Custom_view"
         android:textColor="@color/white" />
+
     <Button
         android:id="@+id/kotlin"
         android:layout_width="match_parent"
