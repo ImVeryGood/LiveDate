@@ -2,13 +2,18 @@ package com.m.livedate.mvp.base;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
+import com.m.livedate.mvvm.basic.view.LoadingDialog;
 import com.m.livedate.utils.ActivityManager;
+import com.trello.rxlifecycle2.LifecycleTransformer;
+import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -23,6 +28,8 @@ public abstract class BaseActivity<P extends BasePresenter> extends RxAppCompatA
     private Unbinder unbinder;
     protected Context mContext;
     protected P mPresenter;
+    private LoadingDialog loadingDialog;
+    private List<WeakReference<Context>> mWeakReferenceList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,9 +64,38 @@ public abstract class BaseActivity<P extends BasePresenter> extends RxAppCompatA
      */
     protected abstract void initViews();
 
+    public void showLoadingDialog(String msg) {
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            loadingDialog.setLoadingMsg(msg);
+        } else {
+            loadingDialog = new LoadingDialog(this);
+            loadingDialog.setLoadingMsg(msg);
+            loadingDialog.show();
+        }
+    }
+
+    public void dismissLoadingDialog() {
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
+            loadingDialog = null;
+        }
+    }
+
     @Override
-    public Context mContext() {
-        return mContext;
+    public Context getContext() {
+        if (mWeakReferenceList.size() == 0) {
+            WeakReference<Context> weakReference = new WeakReference<>(mContext);
+            mWeakReferenceList.add(weakReference);
+            return weakReference.get();
+        } else {
+            WeakReference<Context> weakReference = mWeakReferenceList.get(0);
+            return weakReference.get();
+        }
+    }
+
+    @Override
+    public <T> LifecycleTransformer<T> bindUntilEvent(FragmentEvent event) {
+        return null;
     }
 
     @Override

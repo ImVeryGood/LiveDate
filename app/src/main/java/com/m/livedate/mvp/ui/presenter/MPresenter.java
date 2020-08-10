@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.m.livedate.mvp.ApiManage;
 import com.m.livedate.mvp.base.BasePresenter;
+import com.m.livedate.mvp.base.MBasePresenter;
 import com.m.livedate.mvp.base.net.MObserver;
 import com.m.livedate.mvp.base.net.downfile.DownFileCallback;
 import com.m.livedate.mvp.base.net.downfile.DownLoadManager;
@@ -24,27 +25,34 @@ import okhttp3.RequestBody;
  * @author:spc
  * @describe：
  */
-public class MPresenter extends BasePresenter<MView> {
+public class MPresenter extends MBasePresenter<MView> {
 
     private DownModel downModel;
 
     public MPresenter(MView view) {
         super(view);
+    }
+
+    @Override
+    protected void init() {
         getData();
     }
 
     public void getData() {
+        mView.showLoadingDialog("加载中...");
         ApiManage.getInstance().getArticleBean()
-                .compose(ApiManage.toMainThread())
+                .compose(toMainThread())
                 .compose(mView.bindToLifecycle())
                 .subscribe(new MObserver<ArticleBean>() {
                     @Override
                     protected void success(ArticleBean articleBean) {
                         mView.showArticle(articleBean);
+                        mView.dismissLoadingDialog();
                     }
 
                     @Override
                     protected void error(String error) {
+                        mView.dismissLoadingDialog();
 
                     }
                 });

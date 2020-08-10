@@ -1,6 +1,7 @@
 package com.m.livedate.mvp.ui.view;
 
 import com.m.livedate.mvp.base.BaseView;
+import com.m.livedate.mvp.base.MBaseView;
 import com.m.livedate.mvp.ui.bean.ArticleBean;
 
 /**
@@ -9,6 +10,6 @@ import com.m.livedate.mvp.ui.bean.ArticleBean;
  * @author:spc
  * @describe：
  */
-public interface MView extends BaseView {
+public interface MView extends MBaseView {
     void showArticle(ArticleBean articleBean);
 }

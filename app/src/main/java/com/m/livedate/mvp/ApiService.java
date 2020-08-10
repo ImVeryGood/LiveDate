@@ -1,5 +1,6 @@
 package com.m.livedate.mvp;
 
+import com.m.livedate.mvp.base.net.BaseBean;
 import com.m.livedate.mvp.ui.bean.ArticleBean;
 
 import io.reactivex.Observable;
