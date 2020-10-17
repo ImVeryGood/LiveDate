@@ -12,12 +12,13 @@ class KActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_k)
         init();
+
     }
 
     @SuppressLint("ResourceAsColor")
     private fun init() {
-        txt.text="66666"
-       txt.setTextColor(resources.getColor(R.color.textRed));
+        txt.text = "66666"
+        txt.setTextColor(resources.getColor(R.color.textRed));
 //        相当于new
         var mKotlin = MKotlin();
         mKotlin.setInterFace(object : MKotlin.M {
@@ -27,4 +28,6 @@ class KActivity : AppCompatActivity() {
         })
 
     }
+
+    fun largeNum(num1: Int, num2: Int): Int = if (num1 > num2) num1 else num2;
 }

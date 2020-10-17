@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
@@ -30,6 +31,18 @@ public abstract class BaseFragment<VM extends BaseViewModel, DB extends ViewData
     protected Context mContext;
     protected DB dataBinding;
     private LoadingDialog loadingDialog;
+    /**
+     * 是否初始化过布局
+     */
+    protected boolean isViewInitiated;
+    /**
+     * 当前界面是否可见
+     */
+    protected boolean isVisibleToUser;
+    /**
+     * 是否加载过数据
+     */
+    protected boolean isDataInitiated;
 
     public BaseFragment() {
         // Required empty public constructor
@@ -54,12 +67,47 @@ public abstract class BaseFragment<VM extends BaseViewModel, DB extends ViewData
         return dataBinding.getRoot();
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        isViewInitiated = true;
+        prepareFetchData();
+
+    }
+
     /**
      * 初始化DataBinding
      */
     protected DB initDataBinding(LayoutInflater inflater, @LayoutRes int layoutId, ViewGroup container) {
         return DataBindingUtil.inflate(inflater, layoutId, container, false);
     }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        this.isVisibleToUser = isVisibleToUser;
+        if (isVisibleToUser) {
+            prepareFetchData();
+        }
+    }
+
+    public void prepareFetchData() {
+        prepareFetchData(false);
+    }
+
+    /**
+     * 判断懒加载条件
+     *
+     * @param forceUpdate 强制更新，好像没什么用？
+     */
+    public void prepareFetchData(boolean forceUpdate) {
+        if (isVisibleToUser && isViewInitiated && (!isDataInitiated || forceUpdate)) {
+            lazyLoad();
+            isDataInitiated = true;
+        }
+    }
+
+    protected abstract void lazyLoad();
 
     /**
      * 用途DataBinding.setXX()

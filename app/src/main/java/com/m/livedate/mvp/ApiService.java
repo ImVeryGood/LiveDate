@@ -6,6 +6,7 @@ import com.m.livedate.mvp.ui.bean.ArticleBean;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -21,7 +22,7 @@ import retrofit2.http.Url;
  */
 public interface ApiService {
     @GET("article/listproject/0/json")
-    Observable<ArticleBean> getArticleBean();
+    Observable<Response<ArticleBean>> getArticleBean();
 
     @Streaming//大文件要加不然会oom
     @GET

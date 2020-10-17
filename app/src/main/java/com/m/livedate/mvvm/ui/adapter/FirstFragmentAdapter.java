@@ -1,11 +1,12 @@
 package com.m.livedate.mvvm.ui.adapter;
 
 
+import android.graphics.Color;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.library.baseAdapters.BR;
 
+import com.m.livedate.BR;
 import com.m.livedate.R;
 import com.m.livedate.mvvm.basic.adapter.BaseDBRVAdapter;
 import com.m.livedate.mvvm.basic.adapter.BaseDBRVHolder;
@@ -36,6 +37,13 @@ public class FirstFragmentAdapter extends BaseDBRVAdapter<ListBean.DataBean, Rec
 
     @Override
     protected void onBindViewHolder(ListBean.DataBean dataBean, RecyclerItemBinding binding, int position) {
+        if (dataBean.isChecked()){
+            binding.userName.setTextColor(Color.parseColor("#df212c"));
+        }
         super.onBindViewHolder(dataBean, binding, position);
+    }
+
+    public interface setOnSelectClick{
+        void selectClick(int pos);
     }
 }

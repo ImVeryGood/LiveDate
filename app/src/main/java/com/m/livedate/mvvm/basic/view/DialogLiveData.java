@@ -14,7 +14,6 @@ public final class DialogLiveData<T> extends LiveData<T> {
         bean.setMsg("");
         postValue((T) bean);
     }
-
     public void setValue(boolean isShow, String msg) {
         bean.setShow(isShow);
         bean.setMsg(msg);

@@ -1,1 +1,3 @@
+include ':mframe_mvp'
+include ':DEMO'
 include ':app'

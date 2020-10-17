@@ -24,8 +24,11 @@ public class FragmentActivity extends BaseActivity<NulllViewModel, ActivityFragm
     private List<Fragment> fragments;
     private FirstFragment firstFragment;
     private SecondFragment secondFragment;
+    private ThirdFragment thirdFragment;
+    private FourFragment fourFragment;
     private int mIndex = 0;
     private Handler mHandler;
+
     @Override
     protected int getContentViewId() {
         return R.layout.activity_fragment;
@@ -41,8 +44,12 @@ public class FragmentActivity extends BaseActivity<NulllViewModel, ActivityFragm
         fragments = new ArrayList<>();
         firstFragment = new FirstFragment();
         secondFragment = new SecondFragment();
+        thirdFragment = new ThirdFragment();
+        fourFragment=new FourFragment();
         fragments.add(firstFragment);
         fragments.add(secondFragment);
+        fragments.add(thirdFragment);
+        fragments.add(fourFragment);
         getSupportFragmentManager().beginTransaction().add(R.id.frameLayout, firstFragment)
                 .show(firstFragment)
                 .commit();
@@ -58,24 +65,10 @@ public class FragmentActivity extends BaseActivity<NulllViewModel, ActivityFragm
     public void setHandler(Handler handler) {
         mHandler = handler;
     }
+
     @Override
     public void onItemSelected(BottomBarItem bottomBarItem, int previousPosition, int currentPosition) {
-        switch (currentPosition) {
-            case 0:
-                switchFragment(0);
-                MViewModel model=new ViewModelProvider(this).get(MViewModel.class);
-                break;
-            case 1:
-                switchFragment(1);
-                if (mHandler!=null)
-                mHandler.sendEmptyMessage(1);
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-        }
-
+        switchFragment(currentPosition);
     }
 
     public void switchFragment(int currentIndex) {

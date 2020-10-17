@@ -1,6 +1,8 @@
 package com.m.livedate.mvvm.ui;
 
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -22,8 +24,14 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
  * A simple {@link Fragment} subclass.
  */
 public class SecondFragment extends BaseFragment<SecondeViewModel, FragmentSecondBinding> {
-
+    private String title;
     private SecondeNormalAdapter secondeNormalAdapter;
+
+    public static SecondFragment getInstance(String title) {
+        SecondFragment sf = new SecondFragment();
+        sf.title = title;
+        return sf;
+    }
 
     @Override
     protected void setDataBinding() {
@@ -37,12 +45,16 @@ public class SecondFragment extends BaseFragment<SecondeViewModel, FragmentSecon
 
     @Override
     protected void initData() {
-        mViewModel.getPageData(false);
         secondeNormalAdapter = new SecondeNormalAdapter();
         dataBinding.rv.setAdapter(secondeNormalAdapter);
         dataBinding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
+    }
+
+    @Override
+    protected void lazyLoad() {
+        mViewModel.getPageData(false, getActivity());
     }
 
     @Override
@@ -57,25 +69,28 @@ public class SecondFragment extends BaseFragment<SecondeViewModel, FragmentSecon
                 } else if (refreshState.isHeader && refreshState.isOpening) {
                     secondeNormalAdapter.setNewData(dataBeanApiResponse.getData().getDatas());
                     dataBinding.refresh.finishRefresh();
-                }else {
-                    secondeNormalAdapter.setNewData(dataBeanApiResponse.getData().getDatas());
+                } else {
+                    if (dataBeanApiResponse != null) {
+                        secondeNormalAdapter.setNewData(dataBeanApiResponse.getData().getDatas());
+                    }
+
                 }
-            } 
-        });
-        dataBinding.refresh.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                mViewModel.getPageData(false);
-
             }
         });
-        dataBinding.refresh.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                mViewModel.getPageData(true);
-
-            }
-        });
+//        dataBinding.refresh.setOnRefreshListener(new OnRefreshListener() {
+//            @Override
+//            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+//                mViewModel.getPageData(false, getActivity());
+//
+//            }
+//        });
+//        dataBinding.refresh.setOnLoadMoreListener(new OnLoadMoreListener() {
+//            @Override
+//            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+//                mViewModel.getPageData(true, getActivity());
+//
+//            }
+//        });
     }
 
 }

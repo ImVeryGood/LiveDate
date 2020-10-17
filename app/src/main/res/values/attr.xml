@@ -97,4 +97,19 @@
             <enum name="bottom" value="4" />
         </attr>
     </declare-styleable>
+    <declare-styleable name="DragView">
+        <attr name="i_src" format="integer" />
+        <attr name="i_width" format="float" />
+        <attr name="i_height" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="HeaderBar">
+        <attr name="titleTextX" format="string"/>
+        <attr name="titleSize" format="dimension"/>
+        <attr name="titleColor" format="color"/>
+        <attr name="isShowBackX" format="boolean"/>
+        <attr name="rightTextX" format="string"/>
+        <attr name="rightSize" format="dimension"/>
+        <attr name="rightColor" format="color"/>
+    </declare-styleable>
 </resources>

@@ -2,6 +2,7 @@ package com.m.livedate.mvvm.ui.model;
 
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -9,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.m.livedate.mvvm.basic.base.BaseViewModel;
 import com.m.livedate.mvvm.basic.retrofit.ApiResponse;
+import com.m.livedate.mvvm.basic.view.LoadingLayout;
 import com.m.livedate.mvvm.ui.bean.ListBean;
 
 import java.util.List;
@@ -30,7 +32,8 @@ public class MViewModel extends BaseViewModel {
 
     public void getData() {
         trigger.setValue(true);
-        showDialog.setValue(true, "加载中...");
+        //showDialog.setValue(true, "加载中...");
+
     }
 
     public LiveData<ApiResponse<List<ListBean.DataBean>>> getListBeanData() {

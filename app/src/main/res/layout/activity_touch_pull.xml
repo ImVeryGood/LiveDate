@@ -15,29 +15,23 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
 
-    <!--    <com.m.livedate.custom.view.TestBell-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content" />-->
-
-    <!--    <com.m.livedate.custom.view.SwitchButton-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:sb_circleColor="@android:color/white"-->
-    <!--        app:sb_circleRadius="10dp"-->
-    <!--        app:sb_closeBackground="@android:color/black"-->
-    <!--        app:sb_interpolator="Accelerate"-->
-    <!--        app:sb_openBackground="@android:color/holo_red_light"-->
-    <!--        app:sb_status="open" />-->
-
     <com.m.livedate.custom.view.CircleProgress
         android:id="@+id/circle_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:location="top"
         app:base_progress_paint_color="@color/bbl_999999"
         app:circle_radius="@dimen/dp_120"
-        app:progress_stroke_width="@dimen/dp_20"
-        app:progress_paint_color="@color/blue" />
+        app:location="top"
+        app:progress_paint_color="@color/blue"
+        app:progress_stroke_width="@dimen/dp_20" />
+
+    <com.m.livedate.custom.view.LineProgress
+        android:layout_width="400dp"
+        android:layout_height="@dimen/dp_100" />
+
+    <com.m.livedate.custom.view.WaveView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100" />
 
     <Button
         android:id="@+id/btn"

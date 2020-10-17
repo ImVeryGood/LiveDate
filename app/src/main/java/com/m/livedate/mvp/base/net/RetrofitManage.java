@@ -1,6 +1,7 @@
 package com.m.livedate.mvp.base.net;
 
 import com.m.livedate.mvp.StaticQuality;
+import com.m.livedate.mvp.base.call.CustomCallAdapterFactory;
 import com.orhanobut.logger.Logger;
 
 import java.io.BufferedReader;

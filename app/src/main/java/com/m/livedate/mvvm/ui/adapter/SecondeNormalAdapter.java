@@ -13,7 +13,7 @@ import com.m.livedate.mvvm.ui.bean.PagingBean;
  */
 public class SecondeNormalAdapter extends BaseDBRVAdapter<PagingBean.DataBean.DatasBean, SecondFragmentItemBinding> {
     public SecondeNormalAdapter() {
-        super(R.layout.second_fragment_item, BR.pageBean);
+        super(R.layout.records_list_item_layout, BR.pageBean);
     }
 
 }

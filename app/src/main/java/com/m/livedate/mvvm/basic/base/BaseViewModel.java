@@ -1,6 +1,7 @@
 package com.m.livedate.mvvm.basic.base;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.Transformations;
 
+import com.m.livedate.loading.WeiboDialogUtils;
 import com.m.livedate.mvvm.basic.retrofit.ApiResponse;
 import com.m.livedate.mvvm.basic.retrofit.RequestImpl;
 import com.m.livedate.mvvm.basic.view.DialogBean;
@@ -56,7 +58,6 @@ public class BaseViewModel extends AndroidViewModel {
     public void getShowDialog(LifecycleOwner owner, Observer<DialogBean> observer) {
         showDialog.observe(owner, observer);
     }
-
     @Override
     protected void onCleared() {
         super.onCleared();

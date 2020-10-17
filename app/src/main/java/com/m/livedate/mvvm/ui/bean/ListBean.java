@@ -1,5 +1,7 @@
 package com.m.livedate.mvvm.ui.bean;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
 import java.util.List;
 
 /**
@@ -29,6 +31,15 @@ public class ListBean {
         private boolean userControlSetTop;
         private int visible;
         private List<?> children;
+        private boolean isChecked;
+
+        public boolean isChecked() {
+            return isChecked;
+        }
+
+        public void setChecked(boolean checked) {
+            isChecked = checked;
+        }
 
         public int getCourseId() {
             return courseId;
@@ -93,5 +104,7 @@ public class ListBean {
         public void setChildren(List<?> children) {
             this.children = children;
         }
+
+
     }
 }

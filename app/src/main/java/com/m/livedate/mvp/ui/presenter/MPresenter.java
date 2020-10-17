@@ -15,9 +15,12 @@ import com.m.livedate.utils.ApkUtil;
 
 import java.io.File;
 
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.Response;
 
 /**
  * createDate:2020/8/6
@@ -40,22 +43,44 @@ public class MPresenter extends MBasePresenter<MView> {
 
     public void getData() {
         mView.showLoadingDialog("加载中...");
-        ApiManage.getInstance().getArticleBean()
-                .compose(toMainThread())
-                .compose(mView.bindToLifecycle())
-                .subscribe(new MObserver<ArticleBean>() {
+        ApiManage.getInstance().getArticleBean().compose(toMainThread())
+                .subscribe(new Observer<Response<ArticleBean>>() {
                     @Override
-                    protected void success(ArticleBean articleBean) {
-                        mView.showArticle(articleBean);
-                        mView.dismissLoadingDialog();
+                    public void onSubscribe(Disposable d) {
+
                     }
 
                     @Override
-                    protected void error(String error) {
-                        mView.dismissLoadingDialog();
+                    public void onNext(Response<ArticleBean> articleBeanResponse) {
+                          articleBeanResponse.headers();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
 
                     }
                 });
+//        ApiManage.getInstance().getArticleBean()
+//                .compose(toMainThread())
+//                .compose(mView.bindToLifecycle())
+//                .subscribe(new MObserver<ArticleBean>() {
+//                    @Override
+//                    protected void success(ArticleBean articleBean) {
+//                        mView.showArticle(articleBean);
+//                        mView.dismissLoadingDialog();
+//                    }
+//
+//                    @Override
+//                    protected void error(String error) {
+//                        mView.dismissLoadingDialog();
+//
+//                    }
+//                });
     }
 
     /**

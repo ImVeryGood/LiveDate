@@ -1,6 +1,7 @@
 package com.m.livedate.mvvm.ui.model;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -29,7 +30,7 @@ public class SecondeViewModel extends BaseViewModel {
         pagLiveData = map(mRequestImpl.pagingData(trigger));
     }
 
-    public void getPageData(boolean isLoadMore) {
+    public void getPageData(boolean isLoadMore, Context mContext) {
         showDialog.setValue(true);
         if (isLoadMore) {
             trigger.setValue(mPage++);

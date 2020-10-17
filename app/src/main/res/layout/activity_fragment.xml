@@ -15,7 +15,8 @@
         <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottom_bar_layout"/>
 
         <com.m.livedate.bottombar.BottomBarLayout
             android:id="@+id/bottom_bar_layout"

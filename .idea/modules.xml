@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DEMO/DEMO.iml" filepath="$PROJECT_DIR$/.idea/modules/DEMO/DEMO.iml" group="LiveDate/DEMO" />
       <module fileurl="file://$PROJECT_DIR$/LiveDate.iml" filepath="$PROJECT_DIR$/LiveDate.iml" group="LiveDate" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="LiveDate/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mframe_mvp/mframe_mvp.iml" filepath="$PROJECT_DIR$/.idea/modules/mframe_mvp/mframe_mvp.iml" group="LiveDate/mframe_mvp" />
     </modules>
   </component>
 </project>

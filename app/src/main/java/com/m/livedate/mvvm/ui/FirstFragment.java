@@ -15,6 +15,7 @@ import com.m.livedate.mvvm.basic.adapter.OnItemClickListener;
 import com.m.livedate.mvvm.basic.base.BaseFragment;
 import com.m.livedate.databinding.FragmentFirstragmentBinding;
 import com.m.livedate.mvvm.basic.retrofit.ApiResponse;
+import com.m.livedate.mvvm.basic.view.LoadingLayout;
 import com.m.livedate.mvvm.ui.adapter.FirstFragmentAdapter;
 import com.m.livedate.mvvm.ui.bean.ListBean;
 import com.m.livedate.mvvm.ui.model.MViewModel;
@@ -31,6 +32,8 @@ public class FirstFragment extends BaseFragment<MViewModel, FragmentFirstragment
     private RecyclerView recyclerView;
     private FirstFragmentAdapter adapter;
     private SecondeViewModel secondeViewModel;
+    private int selectIndex;
+    private List<ListBean.DataBean> list;
 
     @Override
     protected void setDataBinding() {
@@ -44,8 +47,8 @@ public class FirstFragment extends BaseFragment<MViewModel, FragmentFirstragment
 
     @Override
     protected void initData() {
-        mViewModel.getData();
         recyclerView = dataBinding.rv;
+        mViewModel.getData();
         LinearLayoutManager manager = new LinearLayoutManager(mContext);
         adapter = new FirstFragmentAdapter();
         recyclerView.setLayoutManager(manager);
@@ -57,11 +60,17 @@ public class FirstFragment extends BaseFragment<MViewModel, FragmentFirstragment
     }
 
     @Override
+    protected void lazyLoad() {
+        mViewModel.getData();
+    }
+
+    @Override
     protected void initListener() {
         mViewModel.getListBeanData().observe(getViewLifecycleOwner(), new Observer<ApiResponse<List<ListBean.DataBean>>>() {
             @Override
             public void onChanged(ApiResponse<List<ListBean.DataBean>> listApiResponse) {
-                if (listApiResponse != null){
+                if (listApiResponse != null) {
+                    list = listApiResponse.getData();
                     adapter.setNewData(listApiResponse.getData());
                 }
 
@@ -70,7 +79,10 @@ public class FirstFragment extends BaseFragment<MViewModel, FragmentFirstragment
         adapter.setOnItemListener(new OnItemClickListener<ListBean.DataBean>() {
             @Override
             public void onItemClickListener(ListBean.DataBean dataBean, int position) {
-                ToastUtils.showShortToast(dataBean.getName());
+                list.get(selectIndex).setChecked(false);
+                dataBean.setChecked(true);
+                adapter.notifyDataSetChanged();
+                selectIndex = position;
             }
 
             @Override
