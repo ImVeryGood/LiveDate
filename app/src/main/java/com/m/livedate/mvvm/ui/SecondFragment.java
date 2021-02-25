@@ -1,24 +1,18 @@
 package com.m.livedate.mvvm.ui;
 
 
-import android.util.Log;
-
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.m.livedate.R;
+import com.m.livedate.databinding.FragmentSecondBinding;
 import com.m.livedate.mvvm.basic.base.BaseFragment;
 import com.m.livedate.mvvm.basic.retrofit.ApiResponse;
-import com.m.livedate.databinding.FragmentSecondBinding;
 import com.m.livedate.mvvm.ui.adapter.SecondeNormalAdapter;
 import com.m.livedate.mvvm.ui.bean.PagingBean;
 import com.m.livedate.mvvm.ui.model.SecondeViewModel;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.RefreshState;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -40,6 +40,8 @@ onCreate(窗口正在创建，比如加载layout 布局文件，可做一些初�
 
 ##Context 
 context 上下文对象，对当前运行环境的具体描述，一个抽象类，Activity,service,Application 都是具体实现类，
+为系统组件的正常运行提供必要的环境和资源
+
 可用于 获取系统资源
 启动系统组件
 获取服务
@@ -56,7 +58,10 @@ dialog不能使用getApplicationContext(),会报错为 Unable to add window  tok
   dispatchTouchEvent 
   onInterceptTouchEvent
   onTouchEvent,
-
+ dispatchTouchEvent返回值的意义跟onTouch返回值的区别，两者返回true的时候ACTION都会传递到ACTION_DOWN，其中onTouch返回true的时候由于
+ 不会执行到onTouchEvent所以不会执行到onClick，dispatchTouchEvent返回值为true对会不会执行onClick没有影响；onTouch返回false的时候执行onTouchEvent，
+ 如果此时该控件是可点击的就发执行onClick,而dispatchTouchEvent返回false就停止ACTION传递
+dispatchTouchEvent返回true代表自己处理，交由自己的onTouchEvent处理；返回false表示子View不处理，会返回给父viewgroup的onTouchEvent处理
 ##Handler
 handler 接收和处理消息
 loop 消息泵 轮询，通过messageQueue.next() 来取出消息message，
@@ -80,7 +85,12 @@ private static void prepare(boolean quitAllowed) {
 直接new Handler（）相当于匿名内部类
 匿名内部类 内部类会持有外部类的对象
 问：handler 内存泄漏，为什么其他内部类没有这个问题？
- handler处理的原理
+
+Handler内存泄漏的原因
+MessageQueue持有Message，Message持有activity
+delay多久，message就会持有activity多久
+方法：静态内部类、弱引用
+
 messageQueue-> Message-》包含handler-》持有Activity
  delay
  messageQueue位于内存，释放持有Activity 内存泄漏
@@ -258,5 +268,60 @@ MessageQueue.java
   使用场景： 1、系统有大量相似对象。 2、需要缓冲池的场景。
   
   注意事项： 1、注意划分外部状态和内部状态，否则可能会引起线程安全问题。 2、这些类必须有一个工厂对象加以控制。
+  
+  问：looper 死循环为甚不会卡死？
+  ANR: 五秒内没有响应输入事件，广播接收器十秒内没有执行完毕，消息没有及时处理，Message
+  消息队列中无消息怎么处理 block
+  nativePollOnce值为-1表示无限等待，让出cpu时间片给其线程，本线程等待
+  0表示无须等待直接返回
+  nativePollOnce -> epoll(linux) ->linux层的messagequeue
+  
+## ThreadLocal
+ThreadLocal是一种无同步的线程安全实现，体现了Thread-Specific Storage模式：即使只有一个入口，内部也会为每个线程分配特有的存储空间。
+由于线程间没有共享资源，因此可以实现无锁线程安全；
+总结：线程并发：在多线程开发的场景下
+      传递数据：我们通过ThreadLocal 在同一线程，不同组件中传递公共变量
+      线程隔离：每个线程的变量都是独立的，不会互相影响
+      
+  synchronized 同步机制采用时间换空间的方式，只提供了一份变量，让不同的线程排队访问
+  ThreadLocal 采用以空间换时间的方式，为每一个线程提供了一份变量副本，从而实现同时访问互不干扰
  ##Retrofit
  注解+动态代理+反射+okHttp
+ 
+ 
+ 
+ 
+ adb 安装
+ 
+ adb install ---
+ 
+获取SHA1
+keytool -list -v -keystore jks 文件
+
+
+
+描述一下android应用的启动过程！
+
+1，点击桌面应用图标，Launcher 进程将启动 Activity（MainActivity）的请求以 Binder 的方式发送给了 AMS。
+
+2，AMS 接收到启动请求后，交付 ActivityStarter 处理 Intent 和 Flag 等信息，然后再交给 ActivityStackSupervisior/ActivityStack
+
+3，处理 Activity 进栈相关流程。同时以 Socket 方式请求 Zygote 进程 fork 新进程。
+
+4，Zygote 接收到新进程创建请求后 fork 出新进程。
+
+5，在新进程里创建 ActivityThread 对象，新创建的进程就是应用的主线程，在主线程里开启 Looper 消息循环，开始处理创建 Activity。
+
+6，ActivityThread 利用 ClassLoader 去加载 Activity、创建 Activity 实例，并回调 Activity 的 onCreate()方法。这样便完成了 Activity 的启动。
+
+非系统应用如何在应用退到后台切换下一首歌曲？
+通过service 来实现后台音乐播放
+
+
+retrofit：
+
+Retrofit就是一个网络请求框架的封装，底层的网络请求默认使用的Okhttp，
+本身只是简化了用户网络请求的参数配置等，还能与Rxjava相结合，使用起来更加简洁方便。
+
+用到的设计模式：
+外观模式，构建者模式，工厂模式，代理模式，适配器模式，策略模式，观察者模式

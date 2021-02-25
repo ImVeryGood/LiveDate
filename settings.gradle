@@ -1,3 +1,7 @@
+include ':sign'
+include ':mtrylifcle'
+include ':mvp_kotlin'
+include ':mframe_mvvm'
 include ':mframe_mvp'
 include ':DEMO'
 include ':app'

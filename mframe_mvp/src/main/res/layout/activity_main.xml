@@ -6,7 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".demo.MainActivity">
-
+<WebView
+    android:id="@+id/webview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
