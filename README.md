@@ -325,3 +325,489 @@ Retrofit就是一个网络请求框架的封装，底层的网络请求默认使
 
 用到的设计模式：
 外观模式，构建者模式，工厂模式，代理模式，适配器模式，策略模式，观察者模式
+
+
+图片处理：
+
+保存图片到本地：
+
+     /**
+     * 保存图片到本地
+     *
+     * @param mContext
+     * @param bitmap
+     */
+    public void saveImage(Context mContext, Bitmap bitmap) {
+        String sdCardDir = Environment.getExternalStorageDirectory() + "/DCIM/";
+        File appDir = new File(sdCardDir, "repay");
+        if (!appDir.exists()) {
+            appDir.mkdir();
+        }
+        String fileName = "repay" + System.currentTimeMillis() + ".jpg";
+        File f = new File(appDir, fileName);
+        try {
+            FileOutputStream fos = new FileOutputStream(f);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+            notify(mContext, f);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * 通知相册刷新
+     *
+     * @param mContext
+     * @param file
+     */
+    public void notify(Context mContext, File file) {
+        Intent mIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        Uri uri = Uri.fromFile(file);
+        mIntent.setData(uri);
+        mContext.sendBroadcast(mIntent);
+    }
+
+    /**
+     * bitmap转为base64
+     *
+     * @param bitmap
+     * @return
+     */
+    public static String bitmapToBase64(Bitmap bitmap) {
+
+        String result = null;
+        ByteArrayOutputStream baos = null;
+        try {
+            if (bitmap != null) {
+                baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+
+                baos.flush();
+                baos.close();
+
+                byte[] bitmapBytes = baos.toByteArray();
+                result = Base64.encodeToString(bitmapBytes, Base64.DEFAULT);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (baos != null) {
+                    baos.flush();
+                    baos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "data:image/png;base64," + result;
+    }
+    
+    public static Bitmap getBitmap(String url) {
+            Bitmap bm = null;
+            try {
+                URL iconUrl = new URL(url);
+                URLConnection conn = iconUrl.openConnection();
+                HttpURLConnection http = (HttpURLConnection) conn;
+    
+                int length = http.getContentLength();
+    
+                conn.connect();
+                // 获得图像的字符流
+                InputStream is = conn.getInputStream();
+                BufferedInputStream bis = new BufferedInputStream(is, length);
+                bm = BitmapFactory.decodeStream(bis);
+                bis.close();
+                is.close();// 关闭流
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            return bm;
+        }
+        
+        
+文件压缩：
+        
+        public class FileCompressUtil {
+            public static final int SIZETYPE_B = 1;//获取文件大小单位为B的double值
+            public static final int SIZETYPE_KB = 2;//获取文件大小单位为KB的double值
+            public static final int SIZETYPE_MB = 3;//获取文件大小单位为MB的double值
+            public static final int SIZETYPE_GB = 4;//获取文件大小单位为GB的double值
+        
+            /**
+             * 获取文件指定文件的指定单位的大小
+             *
+             * @param filePath 文件路径
+             * @param sizeType 获取大小的类型1为B、2为KB、3为MB、4为GB
+             * @return double值的大小
+             */
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            public static double getFileOrFilesSize(String filePath, int sizeType) {
+                File file = new File(filePath);
+                long blockSize = 0;
+                try {
+                    if (file.isDirectory()) {
+                        blockSize = getFileSizes(file);
+                    } else {
+                        blockSize = getFileSize(file);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e("获取文件大小", "获取失败!");
+                }
+                return FormetFileSize(blockSize, sizeType);
+            }
+        
+            /**
+             * 调用此方法自动计算指定文件或指定文件夹的大小
+             *
+             * @param filePath 文件路径
+             * @return 计算好的带B、KB、MB、GB的字符串
+             */
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            public static String getAutoFileOrFilesSize(String filePath) {
+                File file = new File(filePath);
+                long blockSize = 0;
+                try {
+                    if (file.isDirectory()) {
+                        blockSize = getFileSizes(file);
+                    } else {
+                        blockSize = getFileSize(file);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e("获取文件大小", "获取失败!");
+                }
+                return FormetFileSize(blockSize);
+            }
+        
+            /**
+             * 获取指定文件大小
+             *
+             * @param
+             * @return
+             * @throws Exception
+             */
+            private static long getFileSize(File file) throws Exception {
+                long size = 0;
+                if (file.exists()) {
+                    FileInputStream fis = null;
+                    fis = new FileInputStream(file);
+                    size = fis.available();
+                } else {
+                    file.createNewFile();
+                    Log.e("获取文件大小", "文件不存在!");
+                }
+                return size;
+            }
+        
+            /**
+             * 获取指定文件夹
+             *
+             * @param f
+             * @return
+             * @throws Exception
+             */
+            private static long getFileSizes(File f) throws Exception {
+                long size = 0;
+                File flist[] = f.listFiles();
+                for (int i = 0; i < flist.length; i++) {
+                    if (flist[i].isDirectory()) {
+                        size = size + getFileSizes(flist[i]);
+                    } else {
+                        size = size + getFileSize(flist[i]);
+                    }
+                }
+                return size;
+            }
+        
+            /**
+             * 转换文件大小
+             *
+             * @param fileS
+             * @return
+             */
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            private static String FormetFileSize(long fileS) {
+                DecimalFormat df = new DecimalFormat("#.00");
+                String fileSizeString = "";
+                String wrongSize = "0B";
+                if (fileS == 0) {
+                    return wrongSize;
+                }
+                if (fileS < 1024) {
+                    fileSizeString = df.format((double) fileS) + "B";
+                } else if (fileS < 1048576) {
+                    fileSizeString = df.format((double) fileS / 1024) + "KB";
+                } else if (fileS < 1073741824) {
+                    fileSizeString = df.format((double) fileS / 1048576) + "MB";
+                } else {
+                    fileSizeString = df.format((double) fileS / 1073741824) + "GB";
+                }
+                return fileSizeString;
+            }
+        
+            /**
+             * 转换文件大小,指定转换的类型
+             *
+             * @param fileS
+             * @param sizeType
+             * @return
+             */
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            private static double FormetFileSize(long fileS, int sizeType) {
+                DecimalFormat df = new DecimalFormat("#.00");
+                double fileSizeLong = 0;
+                switch (sizeType) {
+                    case SIZETYPE_B:
+                        fileSizeLong = Double.valueOf(df.format((double) fileS));
+                        break;
+                    case SIZETYPE_KB:
+                        fileSizeLong = Double.valueOf(df.format((double) fileS / 1024));
+                        break;
+                    case SIZETYPE_MB:
+                        fileSizeLong = Double.valueOf(df.format((double) fileS / 1048576));
+                        break;
+                    case SIZETYPE_GB:
+                        fileSizeLong = Double.valueOf(df.format((double) fileS / 1073741824));
+                        break;
+                    default:
+                        break;
+                }
+                return fileSizeLong;
+            }
+        
+            public static Bitmap compressImage(String filePath) {
+                Bitmap image = BitmapFactory.decodeFile(filePath);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                image.compress(Bitmap.CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+                int options = 90;
+                while (baos.toByteArray().length / 1024 > 2000) { // 循环判断如果压缩后图片是否大于2000kb,大于继续压缩
+                    baos.reset(); // 重置baos即清空baos
+                    image.compress(Bitmap.CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
+                    options -= 10;// 每次都减少10
+                }
+        
+                ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());// 把压缩后的数据baos存放到ByteArrayInputStream中
+                Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);// 把ByteArrayInputStream数据生成图片
+                return bitmap;
+            }
+        
+            public static Drawable zoomDrawable(Bitmap bitmap, int w, int h) {
+                Drawable drawable = new BitmapDrawable(bitmap);
+                int width = drawable.getIntrinsicWidth();
+                int height = drawable.getIntrinsicHeight();
+                Bitmap oldbmp = drawableToBitmap(drawable);
+                Matrix matrix = new Matrix();
+                float scaleWidth = ((float) w / width);
+                float scaleHeight = ((float) h / height);
+                matrix.postScale(scaleWidth, scaleHeight);
+                Bitmap newbmp = Bitmap.createBitmap(oldbmp, 0, 0, width, height,
+                        matrix, true);
+                return new BitmapDrawable(null, newbmp);
+            }
+        
+            public static Bitmap drawableToBitmap(Drawable drawable) {
+                int width = drawable.getIntrinsicWidth();
+                int height = drawable.getIntrinsicHeight();
+                Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
+                        : Bitmap.Config.RGB_565;
+                Bitmap bitmap = Bitmap.createBitmap(width, height, config);
+                Canvas canvas = new Canvas(bitmap);
+                drawable.setBounds(0, 0, width, height);
+                drawable.draw(canvas);
+                return bitmap;
+            }
+        
+            //使用BitmapFactory.Options的inSampleSize参数来缩放
+            public static Drawable resizeImage2(String path, int width, int height) {
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;//不加载bitmap到内存中
+                BitmapFactory.decodeFile(path, options);
+                int outWidth = options.outWidth;
+                int outHeight = options.outHeight;
+                options.inDither = false;
+                options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                options.inSampleSize = 1;
+        
+                if (outWidth != 0 && outHeight != 0 && width != 0 && height != 0) {
+                    int sampleSize = (outWidth / width + outHeight / height) / 2;
+                    options.inSampleSize = sampleSize;
+                }
+        
+                options.inJustDecodeBounds = false;
+                return new BitmapDrawable(BitmapFactory.decodeFile(path, options));
+            }
+        }
+        
+        
+ 时间转换以及处理：
+ 
+        public class TimeStampUtils {
+        
+            /**
+             * （int）时间戳转Date
+             *
+             * @param timestamp
+             * @return
+             */
+            public static Date stampForDate(Integer timestamp) {
+                return new Date((long) timestamp * 1000);
+            }
+        
+            /**
+             * （long）时间戳转Date
+             *
+             * @param timestamp
+             * @return
+             */
+            public static Date longStampForDate(long timestamp) {
+                return new Date(timestamp);
+            }
+        
+            /**
+             * date转String
+             *
+             * @param date
+             * @return
+             */
+            public static String dateForString(Date date) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//时间的格式
+                return sdf.format(date);
+            }
+        
+            /**
+             * date转String
+             * : 29 Jan. 2021
+             *
+             * @param date
+             * @return
+             */
+            public static String dateForStringEnglish(Date date) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd MMM'.' yyyy", Locale.ENGLISH);//时间的格式
+                return sdf.format(date);
+            }
+        
+            /**
+             * date转String
+             *
+             * @param date
+             * @return
+             */
+            public static String longForString(long date) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//时间的格式
+                sdf.setTimeZone(TimeZone.getTimeZone("GMT+08"));
+                return sdf.format(date);
+            }
+        
+            /**
+             * String转Date
+             *
+             * @param time
+             * @return
+             */
+            public static Date stringForDate(String time) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//时间的格式
+                Date date = null;
+                try {
+                    date = sdf.parse(time);
+                } catch (ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                return date;
+            }
+        
+            /**
+             * Date转时间戳
+             *
+             * @param data
+             * @return
+             */
+            public static Integer dateForStamp(Date data) {
+                return (int) (data.getTime() / 1000);
+            }
+        
+            /**
+             * 格式化时间
+             *
+             * @param timeStamp
+             * @return
+             */
+            public static String YYYYMMDDHHmmss(long timeStamp) {
+                Date date = new Date(timeStamp);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//时间的格式
+                return sdf.format(date);
+            }
+        
+            /**
+             * 格式化时间
+             *
+             * @param timeStamp
+             * @return
+             */
+            public static String YYYYMMDD(long timeStamp) {
+                Date date = new Date(timeStamp);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//时间的格式
+                return sdf.format(date);
+            }
+        
+            /**
+             * 获取当前时间
+             *
+             * @return
+             */
+            public static String getCurrentTime() {
+                return YYYYMMDDHHmmss(System.currentTimeMillis());
+            }
+        }
+
+
+隐藏键盘：
+
+        
+    /**
+     * 键盘
+     *
+     * @param mContext
+     */
+    public static void hintKeyBoard(Activity mContext) {
+        //拿到InputMethodManager
+        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        //如果window上view获取焦点 && view不为空
+        if (imm.isActive() && mContext.getCurrentFocus() != null) {
+            //拿到view的token 不为空
+            if (mContext.getCurrentFocus().getWindowToken() != null) {
+                //表示软键盘窗口总是隐藏，除非开始时以SHOW_FORCED显示。
+                imm.hideSoftInputFromWindow(mContext.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
+    }
+    
+判断bean类是否都有值
+     
+     public static boolean isObjectFieldEmpty(Object object) {
+             boolean flag = false;
+             if (object != null) {
+                 Class<?> entity = object.getClass();
+                 Field[] fields = entity.getDeclaredFields();//获取该类的所有成员变量（私有的）
+                 for (Field field : fields) {
+                     try {
+                         field.setAccessible(true);
+                         if (field.get(object) != null || !"".equals(field.get(object))) {
+                             flag = true;
+                             break;
+                         }
+                     } catch (IllegalAccessException e) {
+                         e.printStackTrace();
+                     }
+                 }
+             }
+             return flag;
+         }
