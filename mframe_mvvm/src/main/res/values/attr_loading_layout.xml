@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="loading_layout_id" type="id" />
+
+    <declare-styleable name="LoadingLayout">
+        <attr name="loadingViewDrawable" format="reference"/>
+        <attr name="loadFailureViewDrawable" format="reference"/>
+        <attr name="netErrorViewDrawable" format="reference"/>
+        <attr name="nullDataViewDrawable" format="reference"/>
+    </declare-styleable>
+</resources>

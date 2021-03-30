@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="nbiot_cmd">
+        <item>查询SIM卡号</item>
+        <item>信号</item>
+        <item>开启射频</item>
+        <item>关闭射频</item>
+        <item>自动搜网</item>
+        <item>查询网络状态</item>
+        <item>创建socket</item>
+        <item>重启</item>
+        <item>查询扰码</item>
+        <item>关闭扰码功能1</item>
+        <item>关闭扰码功能2</item>
+        <item>开启扰码功能1</item>
+        <item>开启扰码功能2</item>
+    </string-array>
+    <string-array name="nbiot_data">
+        <item>AT+CIMI</item>
+        <item>AT+CSQ</item>
+        <item>AT+CFUN=1</item>
+        <item>AT+CFUN?</item>
+        <item>AT+CGATT=1</item>
+        <item>AT+CEREG?</item>
+        <item>AT+NSOCR=DGRAM,17,1234,1</item>
+        <item>AT+NRB</item>
+        <item>AT+NCONFIG?</item>
+        <item>AT+NCONFIG=CR_0354_0338_SCRAMBLING,FALSE</item>
+        <item>AT+NCONFIG=CR_0859_SI_AVOID,FALSE</item>
+        <item>AT+NCONFIG=CR_0354_0338_SCRAMBLING,TRUE</item>
+        <item>AT+NCONFIG=CR_0859_SI_AVOID,TRUE</item>
+    </string-array>
+</resources>
