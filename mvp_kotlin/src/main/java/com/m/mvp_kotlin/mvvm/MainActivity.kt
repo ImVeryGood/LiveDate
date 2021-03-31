@@ -30,17 +30,18 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMain2Binding>() {
             })
 
             listArticle.observe(this@MainActivity, Observer {
-                text.text = it[0].author
+                Log.d(TAG, "observe: "+it[0].imgUrl)
             })
             list.observe(this@MainActivity, Observer {
-                text2.text=it[1].author
+                text2.text = it?.get(0)
+                Log.d(TAG, "observe: $it")
             })
         }
 
     }
 
     fun getClick(view: View) {
-        mViewModel.getNetData()
+        mViewModel.getNetData("index")
 
     }
 }

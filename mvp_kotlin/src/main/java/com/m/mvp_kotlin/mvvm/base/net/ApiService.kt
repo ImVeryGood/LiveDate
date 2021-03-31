@@ -1,7 +1,9 @@
 package com.m.mvp_kotlin.mvvm.base.net
 
-import com.m.mvp_kotlin.bean.AriticleResponse
+import com.m.mvp_kotlin.bean.BannerBean
 import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Query
 
 /**
  * createDate:2021/3/30
@@ -9,9 +11,9 @@ import retrofit2.http.GET
  * @describe：
  */
 interface ApiService {
-    @GET("article/top/json")
-    suspend fun getMyPerConfig(): ApiResponse<List<AriticleResponse>>
+    @GET("message/banner/query")
+    suspend fun banner(@Query("type") type: String): ApiResponse<List<BannerBean>>
 
-    @GET("article/top/json")
-    suspend fun yPerConfig(): ApiResponse<List<AriticleResponse>>
+    @POST("/trade/card/list")
+    suspend fun yPerConfig(): ApiResponse<List<String>>
 }
